@@ -1,0 +1,24 @@
+- name: install dhcp server
+  apt:
+    name: isc-dhcp-server
+    update_cache: yes
+
+- name: copiar configuración isc-dhcp-server
+  template:
+    src: isc-dhcp-server
+    dest: /etc/default/isc-dhcp-server
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart dhcp
+
+- name: copiar configuración dhcpd.conf
+  template:
+    src: dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart dhcp

@@ -1,0 +1,32 @@
+#/network/interfaces
+interface_nat: ens3
+interface_1: ens8
+interface_2: ens9
+address_1: 192.168.100.1
+address_2: 192.168.200.1
+broadcast_1: 192.168.100.255
+broadcast_2: 192.168.200.255
+ 
+#isc-dhcp-server
+ansible_interface: ens8 ens9
+
+#dhcp.conf
+#interface 1
+sub_net_1: 192.168.100.0
+mask_1: 255.255.255.0
+range_1: 192.168.100.60 192.168.100.90
+router_1: 192.168.100.1
+dns_1: 1.1.1.1
+dns_2: 1.0.0.1
+max_time_1: 43200
+default_time_1: 43200
+
+#interface 2
+sub_net_2: 192.168.200.0
+mask_2: 255.255.255.0
+range_2: 192.168.200.60 192.168.200.90
+router_2: 192.168.200.1
+dns_1: 1.1.1.1
+dns_2: 1.0.0.1
+max_time_2: 3600
+default_time_2: 3600

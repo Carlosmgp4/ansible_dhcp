@@ -1,0 +1,16 @@
+- hosts: all
+  become: true
+  roles:
+   - role: commons
+
+- hosts: all
+  become: true
+  roles:
+   - role: red
+
+- hosts: all
+  become: true
+  roles:
+   - role: dhcp
+
+

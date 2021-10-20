@@ -1,0 +1,32 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug {{interface_nat}}
+iface ens3 inet dhcp
+        post-up iptables -t nat -A POSTROUTING -s {{sub_net_1}}/24 -o {{interface_nat}} -j M>
+        post-up iptables -t nat -A POSTROUTING -s {{sub_net_2}}/24 -o {{interface_nat}} -j M>
+
+# configure static ens8
+auto {{interface_1}}
+iface {{interface_1}} inet static
+        address {{address_1}}
+        netmask {{mask_1}}
+        network {{sub_net_1}}
+        broadcast {{broadcast_1}}
+        gateway {{address_1}}
+
+# configure static ens9
+auto ens9 
+iface ens9 inet static
+        address {{address_2}}
+        netmask {{mask_2}}
+        network {{sub_net_2}}
+        broadcast {{broadcast_2}}
+        gateway {{address_2}}
